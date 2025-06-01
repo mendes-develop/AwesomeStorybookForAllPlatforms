@@ -12,5 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const BaseComponentName: Story = {
   args: {
+    children: 'Heading 1',
+    className: "text-red-500",
   },
 };

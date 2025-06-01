@@ -16,6 +16,7 @@ module.exports = {
           'react-native-reanimated',
           'nativewind',
           'react-native-css-interop',
+          '@rn-primitives'
         ],
         babelPresets: ['nativewind/babel'],
         babelPresetReactOptions: { jsxImportSource: 'nativewind' },
