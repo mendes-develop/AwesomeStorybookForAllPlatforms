@@ -1,7 +1,7 @@
 // Import your global CSS file
 import "../global.css"
 
-import type { Preview } from "@storybook/react-webpack5";
+import type { Preview } from "@storybook/react";
 
 const preview: Preview = {
   parameters: {

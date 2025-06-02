@@ -1,6 +1,6 @@
 import path from 'path';
 
-/** @type{import("@storybook/react-webpack5").StorybookConfig} */
+/** @type{import("@storybook/react-vite").StorybookConfig} */
 module.exports = {
   stories: [
     "../components/**/*.stories.mdx",
@@ -8,7 +8,7 @@ module.exports = {
   ],
 
   addons: ["@storybook/addon-links", {
-    name: '@storybook/addon-react-native-web',
+    name: '@storybook/addon-react-native-web-vite',
     options: {
       modulesToTranspile: [
         'react-native-reanimated',
@@ -32,28 +32,23 @@ module.exports = {
   }, '@storybook/addon-docs'],
 
   framework: {
-    name: "@storybook/react-webpack5",
+    name: "@storybook/react-vite",
     options: {},
   },
 
-  webpackFinal: async (config, { configType }) => {
-    config.module.rules.push({
-      test: /\.css$/,
-      use: [
-        {
-          loader: 'postcss-loader',
-          options: {
-            postcssOptions: {
-              plugins: [require('tailwindcss'), require('autoprefixer')]
-            }
-          }
-        }
-      ],
-      include: path.resolve(__dirname, '../') // path to project root
-    })
+  core: {
+    builder: '@storybook/builder-vite',
+  },
 
+  async viteFinal(config) {
+    // Add tailwind and autoprefixer support
     return {
-      ...config
-    }
+      ...config,
+      css: {
+        postcss: {
+          plugins: [require('tailwindcss'), require('autoprefixer')],
+        },
+      },
+    };
   }
 };
